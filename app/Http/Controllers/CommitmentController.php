@@ -33,7 +33,7 @@ class CommitmentController extends Controller
 
         $commitment->update($validated);
 
-        return back()->with('flash', "Marked “{$commitment->title}” as ".str_replace('_', ' ', $validated['status']).'.');
+        return back()->with('flash', 'Marked "' . $commitment->title . '" as ' . str_replace('_', ' ', $validated['status']) . '.');
     }
 
     public function nudge(Commitment $commitment): RedirectResponse
@@ -43,6 +43,28 @@ class CommitmentController extends Controller
 
         $name = $commitment->stakeholder?->name ?? 'them';
 
-        return back()->with('flash', "Nudge logged — {$name} chased about “{$commitment->title}”.");
+        return back()->with('flash', 'Nudge logged — ' . $name . ' chased about "' . $commitment->title . '".');
+    }
+
+    public function timeline(): Response
+    {
+        $commitments = Commitment::with(['stakeholder', 'project'])
+            ->whereNotNull('due_date')
+            ->orderBy('due_date')
+            ->get()
+            ->map(fn ($c) => Present::commitment($c));
+
+        return Inertia::render('DeliverablesTimeline', [
+            'commitments' => $commitments,
+        ]);
+    }
+
+    public function show(Commitment $commitment): Response
+    {
+        $commitment->loadMissing(['stakeholder', 'project']);
+
+        return Inertia::render('CommitmentDetail', [
+            'commitment' => Present::commitment($commitment),
+        ]);
     }
 }
