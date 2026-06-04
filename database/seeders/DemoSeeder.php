@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Commitment;
 use App\Models\Communication;
+use App\Models\Meeting;
 use App\Models\Project;
 use App\Models\Reminder;
 use App\Models\Stakeholder;

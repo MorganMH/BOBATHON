@@ -60,4 +60,11 @@ class Stakeholder extends Model
     {
         return $this->hasMany(Reminder::class);
     }
+
+    public function meetings(): BelongsToMany
+    {
+        return $this->belongsToMany(Meeting::class)
+            ->withPivot('role_in_meeting')
+            ->withTimestamps();
+    }
 }
