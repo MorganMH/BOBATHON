@@ -13,17 +13,18 @@ import {
 } from '@carbon/react';
 import { Microphone } from '@carbon/icons-react';
 import type { SharedProps } from '@/types';
+import { AtlasMark } from '@/Components/Atlas';
 
 // Voice (and the Gemini SDK it pulls in) loads only when the orb opens.
 const VoiceOrb = lazy(() => import('@/Voice/VoiceOrb'));
 
 const NAV: { label: string; href: string }[] = [
     { label: 'Command Centre', href: '/' },
+    { label: 'Meetings', href: '/meetings' },
+    { label: 'Deliverables', href: '/commitments' },
     { label: 'Stakeholders', href: '/stakeholders' },
-    { label: 'Commitments', href: '/commitments' },
-    { label: 'Communications', href: '/communications' },
-    { label: 'Topics', href: '/topics' },
     { label: 'Projects', href: '/projects' },
+    { label: 'Atlas', href: '/atlas' },
 ];
 
 export default function AppLayout({ children }: { children: ReactNode }) {

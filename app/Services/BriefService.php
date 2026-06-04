@@ -9,7 +9,7 @@ use App\Models\Reminder;
 use Illuminate\Support\Carbon;
 
 /**
- * Atlas's "be prepared" brain: the morning briefing and per-meeting prep briefs.
+ * Bobby's "be prepared" brain: the morning briefing and per-meeting prep briefs.
  * Gemini-generated when a key is set, deterministic otherwise — always grounded
  * in the real commitments / meetings / topics in the database.
  */
@@ -55,7 +55,7 @@ class BriefService
         $narrative = $this->gemini->generateText(
             prompt: "Write Kathy's morning briefing in 2-3 warm, focused sentences. Lead with what matters most today. ".
                 "Don't greet her (the UI already does). Be specific and name people.\n\n".$context,
-            system: 'You are Atlas, a calm, sharp chief-of-staff. Plain text, no markdown.',
+            system: 'You are Bobby, a calm, sharp chief-of-staff who addresses Kathy as "ma\'am". Plain text, no markdown.',
         );
 
         if (! $narrative) {
@@ -99,7 +99,7 @@ class BriefService
             prompt: "Prepare Kathy for this meeting. Respond as JSON: ".
                 '{"brief": string (2-3 sentences), "talking_points": [string], "chase": [{"who": string, "what": string}], "risks": [string]}'.
                 "\n\n".$context,
-            system: 'You are Atlas, a sharp chief-of-staff preparing a delivery lead for a meeting. Only output JSON.',
+            system: 'You are Bobby, a sharp chief-of-staff preparing a delivery lead for a meeting. Only output JSON.',
         );
 
         if (! $json) {

@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Carbon;
-
 /**
  * The text-chat counterpart to the voice assistant. Same persona, SAME tools —
  * Kathy can type to Atlas or talk to it and get the same grounded answers.
@@ -18,6 +16,7 @@ class TextAgent
     public function __construct(
         private readonly GeminiService $gemini,
         private readonly AgentTools $tools,
+        private readonly AgentContext $context,
     ) {
     }
 
@@ -56,8 +55,15 @@ class TextAgent
                 ];
             }
 
-            // Record the model's tool-call turn, then answer each call.
-            $contents[] = ['role' => 'model', 'parts' => $parts];
+            // Record the model's tool-call turn. Objectify empty args, otherwise
+            // PHP re-encodes `{}` as `[]` and the proto rejects it (400).
+            $contents[] = ['role' => 'model', 'parts' => array_map(function ($p) {
+                if (isset($p['functionCall'])) {
+                    $p['functionCall']['args'] = empty($p['functionCall']['args']) ? (object) [] : $p['functionCall']['args'];
+                }
+
+                return $p;
+            }, $parts)];
             $responseParts = [];
 
             foreach ($calls as $p) {
@@ -80,13 +86,18 @@ class TextAgent
 
     private function persona(): string
     {
-        $today = Carbon::now()->toFormattedDateString();
+        $brief = $this->context->brief();
 
         return <<<PROMPT
-        You are "Atlas", Kathy Bryant's AI chief-of-staff and project-management twin. Today is {$today}.
+        You are "Bobby", Kathy Bryant's AI chief-of-staff and project-management twin.
+        Always address her respectfully as "ma'am".
         Answer in a few concise, friendly sentences of plain text (no markdown headers). Be specific and name people.
-        Use your tools to fetch facts before answering — never invent commitments, people or meetings.
-        You help Kathy manage people, chase commitments and stay prepared.
+
+        You already hold the standing brief below — answer the common questions instantly and proficiently from it.
+        Reach for your tools only for detail the brief doesn't cover, or to take an action. Never invent commitments,
+        people or meetings beyond the brief and tool results.
+
+        {$brief}
         PROMPT;
     }
 

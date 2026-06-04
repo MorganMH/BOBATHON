@@ -36,7 +36,42 @@ class GeminiService
 
     public function liveModel(): string
     {
-        return config('services.gemini.live_model', 'gemini-2.0-flash-live-001');
+        return config('services.gemini.live_model', 'gemini-2.5-flash-native-audio-preview-12-2025');
+    }
+
+    /**
+     * POST to the text model's generateContent with retry/backoff on transient
+     * overload (429/500/503). Returns the decoded response array, or null.
+     */
+    private function request(array $body, int $timeout = 25): ?array
+    {
+        $url = self::BASE."/v1beta/models/{$this->textModel()}:generateContent";
+
+        for ($attempt = 1; $attempt <= 3; $attempt++) {
+            try {
+                $response = Http::timeout($timeout)
+                    ->withHeaders(['x-goog-api-key' => $this->key()])
+                    ->post($url, $body);
+            } catch (\Throwable $e) {
+                Log::warning('Gemini request exception', ['message' => $e->getMessage()]);
+
+                return null;
+            }
+
+            if ($response->successful()) {
+                return $response->json();
+            }
+
+            if (! in_array($response->status(), [429, 500, 503], true) || $attempt === 3) {
+                Log::warning('Gemini request failed', ['status' => $response->status(), 'body' => substr($response->body(), 0, 300)]);
+
+                return null;
+            }
+
+            usleep($attempt * 700000); // 0.7s, then 1.4s — ride out transient overload
+        }
+
+        return null;
     }
 
     /**
@@ -69,25 +104,15 @@ class GeminiService
             $body['generationConfig']['responseMimeType'] = 'application/json';
         }
 
-        try {
-            $response = Http::timeout(20)
-                ->withHeaders(['x-goog-api-key' => $this->key()])
-                ->post(self::BASE."/v1beta/models/{$this->textModel()}:generateContent", $body);
+        $json = $this->request($body, 20);
 
-            if (! $response->successful()) {
-                Log::warning('Gemini generateText failed', ['status' => $response->status(), 'body' => $response->body()]);
-
-                return null;
-            }
-
-            $parts = $response->json('candidates.0.content.parts', []);
-
-            return collect($parts)->pluck('text')->filter()->implode("\n") ?: null;
-        } catch (\Throwable $e) {
-            Log::warning('Gemini generateText exception', ['message' => $e->getMessage()]);
-
+        if (! $json) {
             return null;
         }
+
+        $parts = data_get($json, 'candidates.0.content.parts', []);
+
+        return collect($parts)->pluck('text')->filter()->implode("\n") ?: null;
     }
 
     /**
@@ -117,23 +142,7 @@ class GeminiService
             $body['tools'] = $tools;
         }
 
-        try {
-            $response = Http::timeout(25)
-                ->withHeaders(['x-goog-api-key' => $this->key()])
-                ->post(self::BASE."/v1beta/models/{$this->textModel()}:generateContent", $body);
-
-            if (! $response->successful()) {
-                Log::warning('Gemini chat failed', ['status' => $response->status(), 'body' => $response->body()]);
-
-                return null;
-            }
-
-            return $response->json('candidates.0.content');
-        } catch (\Throwable $e) {
-            Log::warning('Gemini chat exception', ['message' => $e->getMessage()]);
-
-            return null;
-        }
+        return data_get($this->request($body, 25), 'candidates.0.content');
     }
 
     /**

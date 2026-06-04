@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Button, InlineLoading, InlineNotification, Tag } from '@carbon/react';
 import { Close, Microphone, MicrophoneOff } from '@carbon/icons-react';
+import BobbyAvatar from '@/Components/BobbyAvatar';
 import { useVoiceSession } from './useVoiceSession';
 
 interface Props {
@@ -41,17 +42,18 @@ export default function VoiceOrb({ open, onOpenChange, voiceConfigured }: Props)
     const statusLabel = connecting
         ? 'Connecting…'
         : speaking
-          ? 'Atlas is speaking…'
+          ? 'Bobby is speaking…'
           : live
             ? muted
                 ? 'Muted — tap mic to unmute'
                 : 'Listening… just talk'
-            : 'Tap to talk to Atlas';
+            : 'Tap to talk to Bobby';
 
     return (
         <div
             role="dialog"
-            aria-label="Atlas voice assistant"
+            aria-label="Bobby voice assistant"
+            className="cc-voice__panel"
             style={{
                 position: 'fixed',
                 bottom: '1.5rem',
@@ -67,7 +69,8 @@ export default function VoiceOrb({ open, onOpenChange, voiceConfigured }: Props)
         >
             <div className="cc-spread" style={{ marginBottom: '1rem' }}>
                 <strong className="cc-row" style={{ gap: '0.5rem' }}>
-                    Atlas
+                    <BobbyAvatar size={22} />
+                    Bobby
                     {live ? <Tag type="green" size="sm">Live</Tag> : null}
                 </strong>
                 <Button hasIconOnly kind="ghost" size="sm" renderIcon={Close} iconDescription="Close" onClick={() => onOpenChange(false)} />
@@ -81,7 +84,7 @@ export default function VoiceOrb({ open, onOpenChange, voiceConfigured }: Props)
                     aria-label={live ? 'Stop' : 'Start talking'}
                     style={speaking ? { transform: 'scale(1.05)' } : undefined}
                 >
-                    {connecting ? <InlineLoading /> : <Microphone size={34} />}
+                    {connecting ? <InlineLoading /> : live ? <Microphone size={34} /> : <BobbyAvatar size={64} className="cc-bobby--orb" />}
                 </button>
 
                 <p className="cc-muted" style={{ textAlign: 'center', margin: 0 }}>{statusLabel}</p>
@@ -127,7 +130,7 @@ export default function VoiceOrb({ open, onOpenChange, voiceConfigured }: Props)
                     <div className="cc-voice__transcript">
                         {turns.map((t, i) => (
                             <div key={i} className="cc-voice__turn">
-                                <div className="cc-voice__who">{t.role === 'user' ? 'Kathy' : 'Atlas'}</div>
+                                <div className="cc-voice__who">{t.role === 'user' ? 'Kathy' : 'Bobby'}</div>
                                 <div>{t.text}</div>
                             </div>
                         ))}
