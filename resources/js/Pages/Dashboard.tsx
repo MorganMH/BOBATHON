@@ -193,3 +193,10 @@ export default function Dashboard({ stats, chaseToday, dueCommitments, projects,
         </>
     );
 }
+
+import SidebarLayout from '@/Layouts/SidebarLayout';
+import type { ReactNode } from 'react';
+
+
+// Use sidebar layout for dashboard
+Dashboard.layout = (page: ReactNode) => <SidebarLayout>{page}</SidebarLayout>;

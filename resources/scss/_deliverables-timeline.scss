@@ -1,0 +1,372 @@
+// Deliverables Timeline Page Styles
+.deliverables-timeline-page {
+  padding: 2rem;
+  background: var(--cds-background);
+  min-height: 100vh;
+}
+
+.timeline-header {
+  margin-bottom: 2rem;
+
+  .page-title {
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 0 0 0.5rem 0;
+    color: var(--cds-text-primary);
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+    color: var(--cds-text-secondary);
+    margin: 0;
+  }
+
+  .timeline-filters {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.timeline-legend {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: var(--cds-layer-01);
+  border-radius: 4px;
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--cds-text-secondary);
+
+    .legend-color {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+    }
+
+    .commitment-mine-legend {
+      background: linear-gradient(135deg, #0f62fe 0%, #0353e9 100%);
+    }
+
+    .commitment-theirs-legend {
+      background: linear-gradient(135deg, #24a148 0%, #198038 100%);
+    }
+  }
+}
+
+.timeline-container {
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+
+    svg {
+      color: var(--cds-icon-secondary);
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem 0;
+      color: var(--cds-text-primary);
+    }
+
+    p {
+      color: var(--cds-text-secondary);
+      margin: 0;
+    }
+  }
+}
+
+.timeline-scroll {
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.timeline-month {
+  margin-bottom: 3rem;
+
+  .month-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--cds-border-subtle);
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0;
+      color: var(--cds-text-primary);
+    }
+
+    .month-count {
+      font-size: 0.875rem;
+      color: var(--cds-text-secondary);
+      padding: 0.25rem 0.75rem;
+      background: var(--cds-layer-02);
+      border-radius: 12px;
+    }
+  }
+}
+
+.timeline-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  min-height: 200px;
+}
+
+.timeline-item {
+  flex: 0 0 280px;
+  background: var(--cds-layer-01);
+  border-radius: 8px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  border-left: 4px solid transparent;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+    .timeline-item-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  &.commitment-mine {
+    border-left-color: #0f62fe;
+    background: linear-gradient(135deg, rgba(15, 98, 254, 0.05) 0%, rgba(15, 98, 254, 0.02) 100%);
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(15, 98, 254, 0.2);
+    }
+  }
+
+  &.commitment-theirs {
+    border-left-color: #24a148;
+    background: linear-gradient(135deg, rgba(36, 161, 72, 0.05) 0%, rgba(36, 161, 72, 0.02) 100%);
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(36, 161, 72, 0.2);
+    }
+  }
+
+  &.overdue {
+    border-left-color: #da1e28;
+    background: linear-gradient(135deg, rgba(218, 30, 40, 0.08) 0%, rgba(218, 30, 40, 0.03) 100%);
+  }
+
+  .timeline-item-date {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--cds-text-secondary);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+
+  .timeline-item-content {
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 0.75rem 0;
+      color: var(--cds-text-primary);
+      line-height: 1.4;
+    }
+
+    .timeline-item-stakeholder {
+      font-size: 0.875rem;
+      color: var(--cds-text-secondary);
+      margin: 0 0 0.5rem 0;
+    }
+
+    .timeline-item-project {
+      font-size: 0.875rem;
+      color: var(--cds-text-secondary);
+      margin: 0 0 0.75rem 0;
+      font-style: italic;
+    }
+
+    .timeline-item-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+  }
+
+  .timeline-item-arrow {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translate(10px, -50%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    color: var(--cds-icon-primary);
+  }
+}
+
+// Commitment Detail Page Styles
+.commitment-detail-page {
+  padding: 2rem;
+  background: var(--cds-background);
+  min-height: 100vh;
+
+  .detail-header {
+    margin-bottom: 2rem;
+  }
+}
+
+.commitment-main-tile {
+  padding: 2rem;
+
+  .commitment-title-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--cds-border-subtle);
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 0 0 1rem 0;
+      color: var(--cds-text-primary);
+    }
+
+    .commitment-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  }
+
+  .commitment-description {
+    margin-bottom: 2rem;
+
+    h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin: 0 0 0.75rem 0;
+      color: var(--cds-text-primary);
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--cds-text-secondary);
+      margin: 0;
+    }
+  }
+
+  .commitment-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+
+    .detail-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1rem;
+      background: var(--cds-layer-02);
+      border-radius: 4px;
+
+      svg {
+        color: var(--cds-icon-secondary);
+        flex-shrink: 0;
+        margin-top: 0.25rem;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        .detail-label {
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          color: var(--cds-text-secondary);
+          font-weight: 600;
+        }
+
+        .detail-value {
+          font-size: 1rem;
+          color: var(--cds-text-primary);
+        }
+      }
+    }
+  }
+
+  .commitment-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+
+.commitment-meta-tile {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    color: var(--cds-text-primary);
+  }
+
+  .source-ref {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    word-break: break-all;
+  }
+}
+
+.commitment-action-tile {
+  padding: 1.5rem;
+
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    color: var(--cds-text-primary);
+  }
+
+  .quick-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    button {
+      justify-content: flex-start;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .timeline-track {
+    flex-direction: column;
+  }
+
+  .timeline-item {
+    flex: 1 1 auto;
+  }
+
+  .commitment-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Made with Bob

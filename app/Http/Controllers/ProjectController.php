@@ -50,4 +50,54 @@ class ProjectController extends Controller
             'topics' => $project->topics->map(fn ($t) => Present::topic($t))->values(),
         ]);
     }
+
+    public function overview(): Response
+    {
+        $projects = Project::query()
+            ->withCount([
+                'stakeholders as stakeholders_count',
+                'commitments as open_commitments_count' => fn ($q) => $q->whereIn('status', ['pending', 'in_progress']),
+            ])
+            ->get()
+            ->map(fn ($p) => array_merge(Present::project($p), [
+                'stakeholders_count' => $p->stakeholders_count,
+                'open_commitments_count' => $p->open_commitments_count,
+            ]));
+
+        return Inertia::render('ProjectsOverview', [
+            'projects' => $projects,
+        ]);
+    }
+
+    public function summary(): Response
+    {
+        $projects = Project::with('stakeholders')
+            ->withCount('commitments')
+            ->get();
+
+        return Inertia::render('ProjectSummary', [
+            'projects' => $projects->map(fn ($p) => Present::project($p)),
+        ]);
+    }
+
+    public function deliverables(): Response
+    {
+        return Inertia::render('Deliverables', [
+            'projects' => Project::all()->map(fn ($p) => Present::project($p)),
+        ]);
+    }
+
+    public function agenda(): Response
+    {
+        return Inertia::render('Agenda', [
+            'projects' => Project::all()->map(fn ($p) => Present::project($p)),
+        ]);
+    }
+
+    public function prep(): Response
+    {
+        return Inertia::render('Prep', [
+            'projects' => Project::all()->map(fn ($p) => Present::project($p)),
+        ]);
+    }
 }

@@ -114,6 +114,17 @@ export interface Reminder {
     commitment: { id: number; title: string } | null;
 }
 
+export interface Meeting {
+    id: number;
+    title: string;
+    date: string;
+    start_time: string;
+    end_time: string;
+    location: string | null;
+    project_id: number | null;
+    project?: ProjectBrief;
+}
+
 export interface SharedProps {
     currentUser: { name: string; role: string; initials: string };
     appName: string;
