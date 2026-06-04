@@ -1,0 +1,93 @@
+[
+  {
+    "id": "comm-001",
+    "type": "email",
+    "projectId": "proj-001",
+    "subject": "API Integration Update - Security Review Needed",
+    "from": "tom.wilson@company.com",
+    "to": ["kathy.manager@company.com", "sarah.chen@company.com"],
+    "date": "2026-06-04T09:15:00Z",
+    "content": "Hi Kathy,\n\nI wanted to update you on the API integration progress. We've completed the authentication module and it's ready for testing.\n\nHowever, we've hit a blocker - the security team needs to review our OAuth implementation before we can proceed with the payment gateway integration. I've reached out to James from Security, but haven't heard back yet.\n\nAction items:\n1. I'll complete the API documentation by end of day Thursday\n2. Need you to follow up with Security team for review scheduling\n3. Once approved, I can start the payment gateway work (estimated 3 days)\n\nThe good news is we're still on track for the June 15 milestone if we can get the security review done by early next week.\n\nLet me know if you need any clarification.\n\nThanks,\nTom",
+    "extractedActions": ["act-002", "act-003"],
+    "aiSummary": "Tom completed authentication module and needs security review before proceeding with payment gateway. Two action items assigned: API documentation (Tom, Thu) and security review scheduling (Kathy, tomorrow). Project still on track for June 15 if review happens next week.",
+    "hasBlockers": true
+  },
+  {
+    "id": "comm-002",
+    "type": "meeting",
+    "projectId": "proj-001",
+    "subject": "Sprint Planning - June 3",
+    "from": "kathy.manager@company.com",
+    "to": ["sarah.chen@company.com", "tom.wilson@company.com", "maria.garcia@company.com", "james.park@company.com"],
+    "date": "2026-06-03T14:00:00Z",
+    "content": "Meeting Notes - Sprint Planning\n\nAttendees: Kathy, Sarah, Tom, Maria, James\n\nDiscussed:\n- Authentication module completion (Sarah)\n- Payment screen designs (Maria)\n- Security review timeline (James)\n\nDecisions:\n- Sarah to complete OAuth implementation by June 10\n- Maria to finalize payment confirmation screens by June 8\n- James to schedule security review for next week\n\nBlockers:\n- Staging environment still not ready\n- API documentation needs updating\n\nNext meeting: June 10, 2pm",
+    "extractedActions": ["act-001", "act-004"],
+    "aiSummary": "Team committed to completing authentication module by June 10. Security review scheduled for next week. Design team working on payment screens. Staging environment and API docs identified as blockers.",
+    "hasBlockers": true
+  },
+  {
+    "id": "comm-003",
+    "type": "chat",
+    "projectId": "proj-001",
+    "subject": "Dev Channel - API Documentation",
+    "from": "sarah.chen@company.com",
+    "to": ["tom.wilson@company.com", "maria.garcia@company.com"],
+    "date": "2026-06-03T16:30:00Z",
+    "content": "Sarah: Hey Tom, the frontend team needs the updated API docs to continue integration work. When can you have those ready?\n\nTom: Working on it now. Should have the authentication endpoints documented by Thursday.\n\nMaria: That works for me. I need the error codes too for the UI designs.\n\nTom: Will include those. Let me add that to my task list.",
+    "extractedActions": ["act-003"],
+    "aiSummary": "Frontend team waiting on API documentation. Tom committed to completing auth endpoint docs including error codes by Thursday.",
+    "hasBlockers": false
+  },
+  {
+    "id": "comm-004",
+    "type": "email",
+    "projectId": "proj-002",
+    "subject": "Accessibility Audit Results",
+    "from": "rachel.brown@company.com",
+    "to": ["kathy.manager@company.com", "lisa.anderson@company.com", "david.kim@company.com"],
+    "date": "2026-06-03T09:00:00Z",
+    "content": "Hi team,\n\nI've completed the initial accessibility audit for the customer portal redesign. Overall looking good, but found a few issues:\n\n1. Navigation menu keyboard shortcuts not working properly\n2. Some color contrast issues on the dashboard\n3. Screen reader not announcing page changes correctly\n\nLisa - can you prioritize the keyboard navigation fix? That's blocking our WCAG certification.\n\nDavid - the contrast issues are minor but should be addressed before launch.\n\nI'll continue testing the remaining pages this week.\n\nBest,\nRachel",
+    "extractedActions": ["act-007"],
+    "aiSummary": "Accessibility audit found keyboard navigation issues blocking WCAG certification. Lisa assigned to fix navigation shortcuts. Minor contrast issues also identified.",
+    "hasBlockers": true
+  },
+  {
+    "id": "comm-005",
+    "type": "meeting",
+    "projectId": "proj-002",
+    "subject": "QA Planning - May 30",
+    "from": "kathy.manager@company.com",
+    "to": ["rachel.brown@company.com", "lisa.anderson@company.com", "david.kim@company.com"],
+    "date": "2026-05-30T14:00:00Z",
+    "content": "Meeting Notes - QA Planning\n\nAttendees: Kathy, Rachel, Lisa, David\n\nDiscussed:\n- Accessibility testing timeline\n- Browser compatibility requirements\n- Performance benchmarks\n\nDecisions:\n- Rachel to complete WCAG 2.1 AA audit by June 12\n- Lisa to fix any critical accessibility issues immediately\n- David to prepare final design handoff\n\nProject is ahead of schedule - 80% complete with 3 weeks remaining.\n\nNext meeting: June 6, 10am",
+    "extractedActions": ["act-006"],
+    "aiSummary": "QA planning complete. Accessibility audit scheduled for completion by June 12. Project ahead of schedule at 80% completion.",
+    "hasBlockers": false
+  },
+  {
+    "id": "comm-006",
+    "type": "chat",
+    "projectId": "proj-003",
+    "subject": "Integration Team - Vendor Issues",
+    "from": "michael.zhang@company.com",
+    "to": ["emma.taylor@company.com", "chris.johnson@company.com"],
+    "date": "2026-06-01T15:00:00Z",
+    "content": "Michael: Still no response from ShipFast about the webhook documentation. This is blocking our entire shipping integration.\n\nEmma: Same issue with PaymentPro - their rate limits are way too restrictive for our load testing.\n\nChris: I can set up monitoring once we have the APIs working, but we need those docs first.\n\nMichael: I'll escalate to their account manager tomorrow. This is getting critical.\n\nEmma: Please do. We're already 2 weeks behind schedule.",
+    "extractedActions": ["act-008"],
+    "aiSummary": "Multiple vendor blockers identified. ShipFast webhook documentation missing, PaymentPro rate limits too restrictive. Team 2 weeks behind schedule. Escalation to vendor account managers planned.",
+    "hasBlockers": true
+  },
+  {
+    "id": "comm-007",
+    "type": "meeting",
+    "projectId": "proj-003",
+    "subject": "Technical Review - June 1",
+    "from": "kathy.manager@company.com",
+    "to": ["michael.zhang@company.com", "emma.taylor@company.com", "chris.johnson@company.com"],
+    "date": "2026-06-01T16:00:00Z",
+    "content": "Meeting Notes - Technical Review\n\nAttendees: Kathy, Michael, Emma, Chris\n\nCritical Issues:\n- Vendor documentation delays causing major blockers\n- API rate limits preventing proper testing\n- Token expiration issues affecting user experience\n\nAction Items:\n- Michael to contact vendor account managers\n- Emma to implement error handling for API timeouts\n- Chris to set up monitoring and alerting\n\nProject Status: RED - Significantly delayed\nNeed to discuss resource reallocation in next leadership meeting.\n\nNext meeting: June 8, 2pm",
+    "extractedActions": ["act-009", "act-010"],
+    "aiSummary": "Project in critical state with multiple vendor-related blockers. Error handling and monitoring being implemented. Resource reallocation under consideration.",
+    "hasBlockers": true
+  }
+]

@@ -1,0 +1,57 @@
+.command-centre {
+  min-height: 100vh;
+  background-color: var(--cds-background);
+}
+
+.new-item-highlight {
+  animation: slideInFromRight 0.5s ease-out, fadeHighlight 3s ease-out 3s forwards;
+  background-color: #e5f6ff;
+  border-left: 4px solid #0f62fe;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeHighlight {
+  from {
+    background-color: #e5f6ff;
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+.pulse {
+  animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.new-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background-color: #0f62fe;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-left: 8px;
+  text-transform: uppercase;
+}
+
+// Made with Bob

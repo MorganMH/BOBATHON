@@ -1,0 +1,162 @@
+[
+  {
+    "id": "act-001",
+    "projectId": "proj-001",
+    "title": "Complete API authentication module",
+    "description": "Implement OAuth 2.0 authentication for API endpoints",
+    "owner": "Sarah Chen",
+    "dueDate": "2026-06-10",
+    "status": "in-progress",
+    "priority": "high",
+    "source": {
+      "type": "meeting",
+      "reference": "Sprint Planning - June 3",
+      "extractedBy": "ai"
+    },
+    "createdDate": "2026-06-03T14:00:00Z"
+  },
+  {
+    "id": "act-002",
+    "projectId": "proj-001",
+    "title": "Schedule security review with James",
+    "description": "Follow up with Security team for OAuth implementation review",
+    "owner": "Kathy Manager",
+    "dueDate": "2026-06-05",
+    "status": "pending",
+    "priority": "high",
+    "source": {
+      "type": "email",
+      "reference": "Tom's Update Email",
+      "extractedBy": "ai"
+    },
+    "createdDate": "2026-06-04T09:15:00Z"
+  },
+  {
+    "id": "act-003",
+    "projectId": "proj-001",
+    "title": "Update API documentation",
+    "description": "Document authentication endpoints and error codes",
+    "owner": "Tom Wilson",
+    "dueDate": "2026-06-06",
+    "status": "pending",
+    "priority": "medium",
+    "source": {
+      "type": "chat",
+      "reference": "Team Slack - Dev Channel",
+      "extractedBy": "ai"
+    },
+    "createdDate": "2026-06-03T16:30:00Z"
+  },
+  {
+    "id": "act-004",
+    "projectId": "proj-001",
+    "title": "Design payment confirmation screen",
+    "description": "Create mockups for payment success/failure states",
+    "owner": "Maria Garcia",
+    "dueDate": "2026-06-08",
+    "status": "in-progress",
+    "priority": "high",
+    "source": {
+      "type": "meeting",
+      "reference": "Design Review - June 2",
+      "extractedBy": "ai"
+    },
+    "createdDate": "2026-06-02T11:00:00Z"
+  },
+  {
+    "id": "act-005",
+    "projectId": "proj-001",
+    "title": "Set up staging environment",
+    "description": "Configure staging server for payment gateway testing",
+    "owner": "Tom Wilson",
+    "dueDate": "2026-06-07",
+    "status": "pending",
+    "priority": "high",
+    "source": {
+      "type": "ado",
+      "reference": "ADO-1234",
+      "extractedBy": "manual"
+    },
+    "createdDate": "2026-06-01T10:00:00Z"
+  },
+  {
+    "id": "act-006",
+    "projectId": "proj-002",
+    "title": "Complete accessibility audit",
+    "description": "Run WCAG 2.1 AA compliance tests on all pages",
+    "owner": "Rachel Brown",
+    "dueDate": "2026-06-12",
+    "status": "in-progress",
+    "priority": "high",
+    "source": {
+      "type": "meeting",
+      "reference": "QA Planning - May 30",
+      "extractedBy": "ai"
+    },
+    "createdDate": "2026-05-30T14:00:00Z"
+  },
+  {
+    "id": "act-007",
+    "projectId": "proj-002",
+    "title": "Fix navigation keyboard shortcuts",
+    "description": "Implement keyboard navigation for main menu",
+    "owner": "Lisa Anderson",
+    "dueDate": "2026-06-09",
+    "status": "pending",
+    "priority": "medium",
+    "source": {
+      "type": "email",
+      "reference": "Accessibility Feedback",
+      "extractedBy": "ai"
+    },
+    "createdDate": "2026-06-03T09:00:00Z"
+  },
+  {
+    "id": "act-008",
+    "projectId": "proj-003",
+    "title": "Contact shipping API vendor",
+    "description": "Follow up on missing webhook documentation",
+    "owner": "Michael Zhang",
+    "dueDate": "2026-06-05",
+    "status": "overdue",
+    "priority": "high",
+    "source": {
+      "type": "chat",
+      "reference": "Integration Team Chat",
+      "extractedBy": "ai"
+    },
+    "createdDate": "2026-06-01T15:00:00Z"
+  },
+  {
+    "id": "act-009",
+    "projectId": "proj-003",
+    "title": "Implement error handling for API timeouts",
+    "description": "Add retry logic and user-friendly error messages",
+    "owner": "Emma Taylor",
+    "dueDate": "2026-06-10",
+    "status": "pending",
+    "priority": "high",
+    "source": {
+      "type": "meeting",
+      "reference": "Technical Review - June 1",
+      "extractedBy": "ai"
+    },
+    "createdDate": "2026-06-01T16:00:00Z"
+  },
+  {
+    "id": "act-010",
+    "projectId": "proj-003",
+    "title": "Set up monitoring for API calls",
+    "description": "Configure alerts for API failures and slow responses",
+    "owner": "Chris Johnson",
+    "dueDate": "2026-06-11",
+    "status": "pending",
+    "priority": "medium",
+    "source": {
+      "type": "ado",
+      "reference": "ADO-2345",
+      "extractedBy": "manual"
+    },
+    "createdDate": "2026-06-02T10:00:00Z"
+  }
+]
