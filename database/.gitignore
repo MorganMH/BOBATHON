@@ -1,0 +1,4 @@
+*.sqlite*
+# Keep the seeded demo database tracked in the repo (per project requirement).
+# SQLite sidecar files (-wal/-shm/-journal) stay ignored by the rule above.
+!database.sqlite
