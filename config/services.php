@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'gemini' => [
+        'key' => env('GEMINI_API_KEY'),
+        'live_model' => env('GEMINI_LIVE_MODEL', 'gemini-2.0-flash-live-001'),
+        'text_model' => env('GEMINI_TEXT_MODEL', 'gemini-2.0-flash'),
+        // Local-demo convenience: hand the key to the browser to open the Live socket.
+        'allow_direct_key' => env('VOICE_ALLOW_DIRECT_KEY', false),
+    ],
+
 ];
