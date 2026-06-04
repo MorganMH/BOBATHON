@@ -345,5 +345,67 @@ class DemoSeeder extends Seeder
                 'suggested_for' => Carbon::now()->addDays($offset)->setTime(9, 0),
             ]);
         }
+
+        // -------------------------------------------------------------------
+        // Meetings — Kathy's upcoming agenda, each preppable by Atlas.
+        // [title, type, project, dayOffset, hour, min, durationMin, objective, agenda, recap, recurring, attendees]
+        // -------------------------------------------------------------------
+        $meetings = [
+            ['Daily Stand-up', 'standup', 'app', 0, 9, 30, 15, 'Unblock the team for the day',
+                "Yesterday's progress\nToday's focus\nBlockers & risks",
+                "RC2 confirmed stable by Elena; Tom's auth PR is in review with Sarah. Security review still unbooked.",
+                true, ['sarah' => 'Facilitator', 'tom' => 'Attendee', 'elena' => 'Attendee', 'david' => 'Attendee', 'aisha' => 'Scrum Master']],
+
+            ['1:1 with Priya — Security review', 'one_to_one', 'app', 0, 14, 0, 30, 'Lock in the OAuth security review slot',
+                "OAuth review scope\nFind a 2-hour slot this week\nAPI docs dependency (Tom, Thu)",
+                "Priya confirmed she can review but needs the API docs and a clear 2-hour block; her calendar fills a week out.",
+                false, ['priya' => 'Attendee']],
+
+            ['Acme Pay vendor sync', 'vendor', 'pay', 1, 11, 0, 30, 'Get a firm date for the webhook spec',
+                "Webhook spec status\nFirm delivery date\nEscalation path (cc account manager)",
+                "Spec slipped to 'early next week' with no firm date — this is blocking all payment callback work.",
+                false, ['james' => 'Vendor', 'tom' => 'Attendee']],
+
+            ['Sponsor catch-up — Fiona', 'board', 'app', 1, 16, 0, 20, 'Brief the sponsor on launch confidence',
+                "Security sign-off risk\nVendor (Acme Pay) delay\nMy recommendation",
+                "Fiona asked for a headlines-only launch risk summary before Friday; she wants a clear recommendation.",
+                false, ['fiona' => 'Sponsor']],
+
+            ['Go / No-Go prep', 'steering', 'app', 2, 10, 0, 60, 'Decide what is in scope for 15 July',
+                "Scope cut-line (social-login?)\nSecurity sign-off status\nTest & release readiness",
+                "Hannah proposed cutting social-login to protect the date; decision deferred to this session.",
+                false, ['hannah' => 'Product Owner', 'sarah' => 'Tech Lead', 'elena' => 'QA Lead', 'priya' => 'Security', 'david' => 'DevOps']],
+
+            ['Sprint Review', 'review', 'app', 3, 15, 0, 45, 'Demo the increment and gather feedback',
+                "Demo auth + onboarding\nReview increment\nStakeholder feedback",
+                "Last sprint delivered the auth module and onboarding designs; carry-over on rate-limiting spike.",
+                true, ['sarah' => 'Presenter', 'tom' => 'Attendee', 'marcus' => 'Attendee', 'elena' => 'Attendee', 'olivia' => 'Attendee', 'hannah' => 'Attendee', 'aisha' => 'Facilitator']],
+
+            ['Portal UAT planning', 'workshop', 'portal', 4, 13, 0, 45, 'Line up UAT for the portal redesign',
+                "UAT scope & scripts\nStaging environment (David)\nDates & participants",
+                "Portal is ~80% and on track; needs the staging environment from David before UAT can start.",
+                false, ['olivia' => 'Attendee', 'marcus' => 'Attendee', 'elena' => 'QA', 'noah' => 'Business Analyst', 'hannah' => 'Product Owner']],
+        ];
+
+        foreach ($meetings as [$title, $type, $proj, $d, $h, $min, $dur, $objective, $agenda, $recap, $recurring, $attendees]) {
+            $meeting = Meeting::create([
+                'title' => $title,
+                'type' => $type,
+                'project_id' => $projects[$proj]->id,
+                'scheduled_at' => Carbon::now()->addDays($d)->setTime($h, $min),
+                'duration_min' => $dur,
+                'location' => 'Microsoft Teams',
+                'objective' => $objective,
+                'agenda' => $agenda,
+                'recap' => $recap,
+                'is_recurring' => $recurring,
+            ]);
+
+            $attach = [];
+            foreach ($attendees as $key => $role) {
+                $attach[$people[$key]->id] = ['role_in_meeting' => $role];
+            }
+            $meeting->attendees()->attach($attach);
+        }
     }
 }
