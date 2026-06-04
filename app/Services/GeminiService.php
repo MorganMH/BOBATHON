@@ -54,6 +54,10 @@ class GeminiService
             ],
             'generationConfig' => [
                 'temperature' => 0.4,
+                // 2.5-flash is a reasoning model; disable extended thinking so these
+                // utility calls (summarise / extract / find) return in ~1-2s instead
+                // of 15s+ — fast enough for the UI and well under the request timeout.
+                'thinkingConfig' => ['thinkingBudget' => 0],
             ],
         ];
 

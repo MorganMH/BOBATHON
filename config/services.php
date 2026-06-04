@@ -38,7 +38,7 @@ return [
     'gemini' => [
         'key' => env('GEMINI_API_KEY'),
         'live_model' => env('GEMINI_LIVE_MODEL', 'gemini-2.5-flash-native-audio-preview-12-2025'),
-        'text_model' => env('GEMINI_TEXT_MODEL', 'gemini-2.0-flash'),
+        'text_model' => env('GEMINI_TEXT_MODEL', 'gemini-2.5-flash'),
         'voice' => env('GEMINI_VOICE', 'Aoede'),
         // Local-demo convenience: hand the key to the browser to open the Live socket.
         'allow_direct_key' => env('VOICE_ALLOW_DIRECT_KEY', false),

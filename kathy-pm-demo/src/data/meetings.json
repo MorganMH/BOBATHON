@@ -1,0 +1,57 @@
+[
+  {
+    "id": "meet-001",
+    "title": "Daily Standup",
+    "date": "2026-06-04",
+    "startTime": "09:00",
+    "endTime": "09:15",
+    "attendees": ["Sarah Chen", "Tom Wilson", "Maria Garcia", "James Park"],
+    "projectId": "proj-001",
+    "location": "Virtual - Teams",
+    "type": "standup"
+  },
+  {
+    "id": "meet-002",
+    "title": "Sprint Planning",
+    "date": "2026-06-05",
+    "startTime": "10:00",
+    "endTime": "11:30",
+    "attendees": ["Sarah Chen", "Tom Wilson", "Maria Garcia", "James Park"],
+    "projectId": "proj-001",
+    "location": "Conference Room A",
+    "type": "planning"
+  },
+  {
+    "id": "meet-003",
+    "title": "Design Review",
+    "date": "2026-06-05",
+    "startTime": "14:00",
+    "endTime": "15:00",
+    "attendees": ["Lisa Anderson", "David Kim", "Rachel Brown"],
+    "projectId": "proj-002",
+    "location": "Virtual - Teams",
+    "type": "review"
+  },
+  {
+    "id": "meet-004",
+    "title": "API Integration Sync",
+    "date": "2026-06-06",
+    "startTime": "11:00",
+    "endTime": "12:00",
+    "attendees": ["Michael Zhang", "Emma Taylor", "Chris Johnson"],
+    "projectId": "proj-003",
+    "location": "Conference Room B",
+    "type": "general"
+  },
+  {
+    "id": "meet-005",
+    "title": "Weekly Status Update",
+    "date": "2026-06-07",
+    "startTime": "15:00",
+    "endTime": "16:00",
+    "attendees": ["All Team Members"],
+    "projectId": "proj-001",
+    "location": "Virtual - Teams",
+    "type": "general"
+  }
+]

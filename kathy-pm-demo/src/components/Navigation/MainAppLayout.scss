@@ -1,0 +1,18 @@
+.main-app-layout {
+  min-height: 100vh;
+  background-color: var(--cds-background);
+}
+
+.app-container {
+  display: flex;
+  position: relative;
+}
+
+.app-content {
+  margin-left: 256px; // Width of sidebar
+  padding: 2rem;
+  width: calc(100% - 256px);
+  min-height: calc(100vh - 48px); // Subtract header height
+}
+
+// Made with Bob
