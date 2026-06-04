@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgentToolController;
 use App\Http\Controllers\AiController;
 use App\Http\Controllers\CommitmentController;
 use App\Http\Controllers\CommunicationController;
@@ -33,3 +34,7 @@ Route::post('/ai/find-stakeholder', [AiController::class, 'findStakeholder'])->n
 Route::post('/ai/process-email', [AiController::class, 'processEmail'])->name('ai.processEmail');
 
 Route::get('/voice/session', [VoiceController::class, 'session'])->name('voice.session');
+
+// Shared agent tools (voice + text use the same tool bridge).
+Route::post('/agent/tools/execute', [AgentToolController::class, 'execute'])->name('agent.execute');
+Route::post('/agent/tools/confirm', [AgentToolController::class, 'confirm'])->name('agent.confirm');

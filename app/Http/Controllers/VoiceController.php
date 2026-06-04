@@ -2,73 +2,55 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Commitment;
-use App\Models\Reminder;
-use App\Models\Stakeholder;
+use App\Services\AgentTools;
 use App\Services\GeminiService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Carbon;
 
 class VoiceController extends Controller
 {
-    public function __construct(private readonly GeminiService $gemini)
-    {
+    public function __construct(
+        private readonly GeminiService $gemini,
+        private readonly AgentTools $tools,
+    ) {
     }
 
     /**
-     * Hand the browser what it needs to open the realtime voice (Live API)
-     * socket, plus a system prompt grounded in Kathy's current data so the
-     * assistant can actually talk about her stakeholders and commitments.
+     * Everything the browser needs to open the realtime voice (Live API) socket:
+     * connection mode + key/token, model, voice, a SMALL persona prompt, and the
+     * tool declarations. Facts come from tools at call time, not the prompt.
      */
     public function session(): JsonResponse
     {
         $session = $this->gemini->liveSession();
-        $session['system_instruction'] = $this->systemInstruction();
+
+        $session['voice'] = config('services.gemini.voice', 'Aoede');
+        $session['allowMutations'] = (bool) config('services.gemini.allow_mutations');
+        $session['systemInstruction'] = $this->persona();
+        $session['tools'] = [['functionDeclarations' => $this->tools->declarations()]];
 
         return response()->json($session);
     }
 
-    private function systemInstruction(): string
+    private function persona(): string
     {
-        $people = Stakeholder::query()
-            ->orderBy('name')
-            ->get()
-            ->map(fn ($s) => "- {$s->name}: {$s->role} ({$s->team}). Skills: ".
-                collect($s->skills ?? [])->implode(', ').". Reliability {$s->reliability}%. {$s->expertise}")
-            ->implode("\n");
-
-        $today = Commitment::query()
-            ->with('stakeholder')
-            ->where('direction', 'theirs')
-            ->where('status', '!=', 'done')
-            ->orderByRaw('due_date IS NULL, due_date ASC')
-            ->take(12)
-            ->get()
-            ->map(fn ($c) => "- {$c->stakeholder?->name} owes “{$c->title}” (due {$c->due_date?->toFormattedDateString()}, {$c->status}, {$c->priority})")
-            ->implode("\n");
-
-        $chase = Reminder::query()
-            ->with('stakeholder')
-            ->where('status', 'suggested')
-            ->get()
-            ->map(fn ($r) => "- Chase {$r->stakeholder?->name}: {$r->reason}")
-            ->implode("\n");
+        $today = Carbon::now()->toFormattedDateString();
 
         return <<<PROMPT
         You are "Atlas", Kathy Bryant's calm, capable chief-of-staff for stakeholder management.
-        Kathy is a delivery lead. Keep spoken replies short, warm and practical — one or two
-        sentences unless asked for detail. When she asks who to chase, be specific and name people.
-        You can answer about her colleagues, their commitments, blockers and what to prioritise today.
+        Today is {$today}. Kathy is a delivery lead juggling people, commitments and blockers across several projects.
 
-        TODAY'S TEAM:
-        {$people}
+        Speak in short, warm, practical sentences — usually one or two, as if talking. Get to the point.
 
-        OUTSTANDING COMMITMENTS OTHERS OWE:
-        {$today}
+        You do NOT know the data up front. Use your tools to fetch facts before answering:
+        - who_to_chase: who Kathy should follow up with today and why
+        - find_stakeholder: the right person for a skill or need
+        - get_person_dossier: a colleague's profile, how to work with them, and their open commitments
+        - list_people / search_interactions: browse people or search past emails/chats/meetings/topics
+        - navigate: open a page for her when it helps
+        - create_reminder: draft a chase (this asks for her confirmation before saving)
 
-        SUGGESTED CHASES:
-        {$chase}
-
-        If you don't know something, say so briefly. Never invent commitments that aren't listed.
+        Never invent people, commitments or facts. If a tool returns nothing, say so briefly and suggest a next step.
         PROMPT;
     }
 }

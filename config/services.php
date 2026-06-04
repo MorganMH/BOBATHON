@@ -39,8 +39,11 @@ return [
         'key' => env('GEMINI_API_KEY'),
         'live_model' => env('GEMINI_LIVE_MODEL', 'gemini-2.0-flash-live-001'),
         'text_model' => env('GEMINI_TEXT_MODEL', 'gemini-2.0-flash'),
+        'voice' => env('GEMINI_VOICE', 'Aoede'),
         // Local-demo convenience: hand the key to the browser to open the Live socket.
         'allow_direct_key' => env('VOICE_ALLOW_DIRECT_KEY', false),
+        // Let the voice agent perform write actions (create_reminder) without confirmation.
+        'allow_mutations' => env('VOICE_ALLOW_MUTATIONS', false),
     ],
 
 ];
