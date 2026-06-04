@@ -1,0 +1,102 @@
+[
+  {
+    "id": "block-001",
+    "projectId": "proj-001",
+    "title": "Security review pending for OAuth implementation",
+    "description": "Payment gateway integration blocked pending security team review of authentication module",
+    "severity": "high",
+    "blockedBy": "Security Team (James Park)",
+    "affectedTasks": ["Payment Gateway Integration", "Production Deployment"],
+    "identifiedDate": "2026-06-03T14:00:00Z",
+    "estimatedResolutionDate": "2026-06-08",
+    "status": "active",
+    "dependencies": []
+  },
+  {
+    "id": "block-002",
+    "projectId": "proj-001",
+    "title": "API documentation incomplete",
+    "description": "Frontend team blocked waiting for complete API endpoint documentation",
+    "severity": "medium",
+    "blockedBy": "Tom Wilson (Backend Developer)",
+    "affectedTasks": ["Frontend Integration", "UI Testing"],
+    "identifiedDate": "2026-06-02T10:00:00Z",
+    "estimatedResolutionDate": "2026-06-06",
+    "status": "active",
+    "dependencies": []
+  },
+  {
+    "id": "block-003",
+    "projectId": "proj-001",
+    "title": "Staging environment not ready",
+    "description": "Cannot test payment flows without properly configured staging environment",
+    "severity": "high",
+    "blockedBy": "DevOps Team",
+    "affectedTasks": ["Payment Testing", "Integration Testing"],
+    "identifiedDate": "2026-06-01T15:00:00Z",
+    "estimatedResolutionDate": "2026-06-07",
+    "status": "resolving",
+    "dependencies": []
+  },
+  {
+    "id": "block-004",
+    "projectId": "proj-002",
+    "title": "Screen reader compatibility issue",
+    "description": "Navigation menu not properly announcing to screen readers",
+    "severity": "medium",
+    "blockedBy": "Development Team",
+    "affectedTasks": ["Accessibility Certification"],
+    "identifiedDate": "2026-06-03T11:00:00Z",
+    "estimatedResolutionDate": "2026-06-09",
+    "status": "active",
+    "dependencies": []
+  },
+  {
+    "id": "block-005",
+    "projectId": "proj-003",
+    "title": "Shipping API webhook documentation missing",
+    "description": "Vendor has not provided webhook event documentation needed for integration",
+    "severity": "critical",
+    "blockedBy": "External Vendor (ShipFast API)",
+    "affectedTasks": ["Shipping Integration", "Order Tracking", "Notification System"],
+    "identifiedDate": "2026-05-28T09:00:00Z",
+    "status": "active",
+    "dependencies": []
+  },
+  {
+    "id": "block-006",
+    "projectId": "proj-003",
+    "title": "Payment API rate limits too restrictive",
+    "description": "Current API tier limits prevent load testing with realistic volumes",
+    "severity": "high",
+    "blockedBy": "External Vendor (PaymentPro)",
+    "affectedTasks": ["Load Testing", "Performance Optimization"],
+    "identifiedDate": "2026-05-30T14:00:00Z",
+    "status": "active",
+    "dependencies": []
+  },
+  {
+    "id": "block-007",
+    "projectId": "proj-003",
+    "title": "API authentication tokens expiring too quickly",
+    "description": "Tokens expire after 1 hour causing frequent re-authentication",
+    "severity": "medium",
+    "blockedBy": "External Vendor (PaymentPro)",
+    "affectedTasks": ["User Experience", "Error Handling"],
+    "identifiedDate": "2026-06-01T10:00:00Z",
+    "status": "active",
+    "dependencies": ["block-006"]
+  },
+  {
+    "id": "block-008",
+    "projectId": "proj-003",
+    "title": "Insufficient test data from vendor",
+    "description": "Vendor sandbox environment lacks diverse test scenarios",
+    "severity": "medium",
+    "blockedBy": "External Vendor (ShipFast API)",
+    "affectedTasks": ["Integration Testing", "Error Handling"],
+    "identifiedDate": "2026-06-02T13:00:00Z",
+    "status": "active",
+    "dependencies": ["block-005"]
+  }
+]

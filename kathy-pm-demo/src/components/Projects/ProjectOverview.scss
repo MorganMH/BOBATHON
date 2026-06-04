@@ -1,0 +1,131 @@
+.project-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.project-card {
+  padding: 1.5rem;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.project-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+.project-card-description {
+  font-size: 0.875rem;
+  color: var(--cds-text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.project-card-stats {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--cds-text-secondary);
+}
+
+.project-detail {
+  margin-bottom: 2rem;
+}
+
+.project-detail-tile {
+  padding: 2rem;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+  }
+}
+
+.project-description {
+  font-size: 1rem;
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+.project-stats {
+  margin-bottom: 2rem;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--cds-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--cds-text-primary);
+}
+
+.ai-summary {
+  background-color: var(--cds-layer-01);
+  padding: 1.5rem;
+  border-radius: 4px;
+  border-left: 4px solid #0f62fe;
+
+  h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: #0f62fe;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0 0 0.5rem 0;
+  }
+}
+
+.summary-timestamp {
+  font-size: 0.75rem;
+  color: var(--cds-text-secondary);
+  font-style: italic;
+}
+
+// Made with Bob

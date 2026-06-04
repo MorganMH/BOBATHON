@@ -1,0 +1,110 @@
+[
+  {
+    "id": "proj-001",
+    "name": "Business-Critical App Launch",
+    "description": "Launch of customer-facing mobile application with payment integration",
+    "status": "at-risk",
+    "health": "yellow",
+    "progress": 65,
+    "startDate": "2026-04-01",
+    "endDate": "2026-07-15",
+    "team": [
+      {
+        "id": "user-001",
+        "name": "Sarah Chen",
+        "role": "Lead Developer",
+        "email": "sarah.chen@company.com"
+      },
+      {
+        "id": "user-002",
+        "name": "Tom Wilson",
+        "role": "Backend Developer",
+        "email": "tom.wilson@company.com"
+      },
+      {
+        "id": "user-003",
+        "name": "Maria Garcia",
+        "role": "UI/UX Designer",
+        "email": "maria.garcia@company.com"
+      },
+      {
+        "id": "user-004",
+        "name": "James Park",
+        "role": "Security Specialist",
+        "email": "james.park@company.com"
+      }
+    ],
+    "activeBlockers": 3,
+    "pendingActions": 18,
+    "lastUpdated": "2026-06-04T10:30:00Z",
+    "aiSummary": "Project is 65% complete but facing security review delays. Authentication module completed, payment gateway integration blocked pending approval. Team morale good but timeline at risk."
+  },
+  {
+    "id": "proj-002",
+    "name": "Customer Portal Redesign",
+    "description": "Complete redesign of customer self-service portal with improved accessibility",
+    "status": "on-track",
+    "health": "green",
+    "progress": 80,
+    "startDate": "2026-03-15",
+    "endDate": "2026-06-30",
+    "team": [
+      {
+        "id": "user-005",
+        "name": "Lisa Anderson",
+        "role": "Frontend Developer",
+        "email": "lisa.anderson@company.com"
+      },
+      {
+        "id": "user-006",
+        "name": "David Kim",
+        "role": "UX Designer",
+        "email": "david.kim@company.com"
+      },
+      {
+        "id": "user-007",
+        "name": "Rachel Brown",
+        "role": "QA Engineer",
+        "email": "rachel.brown@company.com"
+      }
+    ],
+    "activeBlockers": 1,
+    "pendingActions": 7,
+    "lastUpdated": "2026-06-04T09:15:00Z",
+    "aiSummary": "Ahead of schedule with 80% completion. Final accessibility testing in progress. Two developers available for reallocation if needed."
+  },
+  {
+    "id": "proj-003",
+    "name": "API Integration Project",
+    "description": "Integration with third-party payment and shipping APIs",
+    "status": "delayed",
+    "health": "red",
+    "progress": 40,
+    "startDate": "2026-05-01",
+    "endDate": "2026-08-15",
+    "team": [
+      {
+        "id": "user-008",
+        "name": "Michael Zhang",
+        "role": "Integration Specialist",
+        "email": "michael.zhang@company.com"
+      },
+      {
+        "id": "user-009",
+        "name": "Emma Taylor",
+        "role": "Backend Developer",
+        "email": "emma.taylor@company.com"
+      },
+      {
+        "id": "user-010",
+        "name": "Chris Johnson",
+        "role": "DevOps Engineer",
+        "email": "chris.johnson@company.com"
+      }
+    ],
+    "activeBlockers": 5,
+    "pendingActions": 23,
+    "lastUpdated": "2026-06-04T08:45:00Z",
+    "aiSummary": "Significantly delayed due to API documentation issues and vendor response times. Multiple blockers affecting timeline. Requires immediate attention and possible resource reallocation."
+  }
+]
