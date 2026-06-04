@@ -37,7 +37,15 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            //
+            // Kathy is the signed-in user of the command centre.
+            'currentUser' => [
+                'name' => 'Kathy Bryant',
+                'role' => 'Delivery Lead',
+                'initials' => 'KB',
+            ],
+            'appName' => config('app.name'),
+            'voiceConfigured' => filled(config('services.gemini.key')),
+            'flash' => fn () => $request->session()->get('flash'),
         ];
     }
 }
