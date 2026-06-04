@@ -1,0 +1,27 @@
+.app-sidebar {
+  position: fixed;
+  left: 0;
+  top: 48px; // Height of Carbon header
+  height: calc(100vh - 48px);
+  width: 256px;
+  background-color: var(--cds-layer-01);
+  border-right: 1px solid var(--cds-border-subtle);
+  z-index: 100;
+
+  .cds--side-nav__items {
+    padding-top: 1rem;
+  }
+
+  .cds--side-nav__link {
+    &:hover {
+      background-color: var(--cds-layer-hover-01);
+    }
+
+    &.cds--side-nav__link--current {
+      background-color: var(--cds-layer-selected-01);
+      border-left: 3px solid var(--cds-interactive-01);
+    }
+  }
+}
+
+// Made with Bob

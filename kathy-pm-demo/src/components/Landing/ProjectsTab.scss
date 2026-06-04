@@ -1,0 +1,75 @@
+.projects-tab {
+  padding: 2rem 0;
+}
+
+.tab-title {
+  font-size: 1.75rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  color: var(--cds-text-primary);
+}
+
+.projects-grid {
+  gap: 1.5rem;
+}
+
+.project-card-landing {
+  padding: 1.5rem;
+  min-height: 250px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .project-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0;
+      flex: 1;
+      margin-right: 1rem;
+    }
+  }
+
+  .project-description {
+    font-size: 0.875rem;
+    color: var(--cds-text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .project-progress {
+    margin-bottom: 1rem;
+
+    .progress-text {
+      display: block;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      color: var(--cds-text-secondary);
+    }
+  }
+
+  .project-stats {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: var(--cds-text-secondary);
+
+    span {
+      &:not(:last-child)::after {
+        content: '•';
+        margin-left: 1rem;
+      }
+    }
+  }
+}
+
+// Made with Bob
