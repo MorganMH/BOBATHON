@@ -91,6 +91,52 @@ class GeminiService
     }
 
     /**
+     * Multi-turn generate with optional tools. Returns the model's `content`
+     * message ({role, parts:[...]}) so callers can inspect functionCall parts.
+     * Returns null on failure.
+     */
+    public function chat(array $contents, ?array $tools = null, ?string $system = null): ?array
+    {
+        if (! $this->isConfigured()) {
+            return null;
+        }
+
+        $body = [
+            'contents' => $contents,
+            'generationConfig' => [
+                'temperature' => 0.4,
+                'thinkingConfig' => ['thinkingBudget' => 0],
+            ],
+        ];
+
+        if ($system) {
+            $body['system_instruction'] = ['parts' => [['text' => $system]]];
+        }
+
+        if ($tools) {
+            $body['tools'] = $tools;
+        }
+
+        try {
+            $response = Http::timeout(25)
+                ->withHeaders(['x-goog-api-key' => $this->key()])
+                ->post(self::BASE."/v1beta/models/{$this->textModel()}:generateContent", $body);
+
+            if (! $response->successful()) {
+                Log::warning('Gemini chat failed', ['status' => $response->status(), 'body' => $response->body()]);
+
+                return null;
+            }
+
+            return $response->json('candidates.0.content');
+        } catch (\Throwable $e) {
+            Log::warning('Gemini chat exception', ['message' => $e->getMessage()]);
+
+            return null;
+        }
+    }
+
+    /**
      * Generate and decode a JSON response. Returns null on failure.
      */
     public function generateJson(string $prompt, ?string $system = null): ?array

@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AgentToolController;
 use App\Http\Controllers\AiController;
+use App\Http\Controllers\AtlasController;
 use App\Http\Controllers\CommitmentController;
 use App\Http\Controllers\CommunicationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\StakeholderController;
 use App\Http\Controllers\TopicController;
@@ -23,6 +25,14 @@ Route::post('/commitments/{commitment}/nudge', [CommitmentController::class, 'nu
 
 Route::get('/communications', [CommunicationController::class, 'index'])->name('communications.index');
 Route::get('/topics', [TopicController::class, 'index'])->name('topics.index');
+
+Route::get('/meetings', [MeetingController::class, 'index'])->name('meetings.index');
+Route::get('/meetings/{meeting}', [MeetingController::class, 'show'])->name('meetings.show');
+Route::post('/meetings/{meeting}/brief', [MeetingController::class, 'brief'])->name('meetings.brief');
+
+Route::get('/atlas', [AtlasController::class, 'index'])->name('atlas.index');
+Route::post('/atlas/ask', [AtlasController::class, 'ask'])->name('atlas.ask');
+Route::get('/atlas/daily-brief', [AtlasController::class, 'dailyBrief'])->name('atlas.dailyBrief');
 
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');

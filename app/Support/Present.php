@@ -166,6 +166,37 @@ class Present
         ];
     }
 
+    public static function meeting(\App\Models\Meeting $m): array
+    {
+        $now = Carbon::now();
+        $start = $m->scheduled_at;
+
+        return [
+            'id' => $m->id,
+            'title' => $m->title,
+            'type' => $m->type,
+            'type_label' => ucwords(str_replace('_', ' ', $m->type)),
+            'scheduled_at' => $start?->toIso8601String(),
+            'time_label' => $start?->format('H:i'),
+            'day_label' => $start?->isToday() ? 'Today' : ($start?->isTomorrow() ? 'Tomorrow' : $start?->format('D j M')),
+            'when' => $start?->diffForHumans(),
+            'duration_min' => $m->duration_min,
+            'location' => $m->location,
+            'objective' => $m->objective,
+            'agenda' => $m->agendaItems(),
+            'recap' => $m->recap,
+            'is_today' => (bool) $start?->isToday(),
+            'is_past' => (bool) $start?->isPast(),
+            'project' => $m->relationLoaded('project') ? self::projectBrief($m->project) : null,
+            'attendees' => $m->relationLoaded('attendees')
+                ? $m->attendees->map(fn ($a) => array_merge(self::personBrief($a), [
+                    'role_in_meeting' => $a->pivot->role_in_meeting ?? null,
+                ]))->values()
+                : [],
+            'attendees_count' => $m->relationLoaded('attendees') ? $m->attendees->count() : null,
+        ];
+    }
+
     public static function now(): string
     {
         return Carbon::now()->toIso8601String();

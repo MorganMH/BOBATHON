@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Commitment;
 use App\Models\Communication;
+use App\Models\Meeting;
 use App\Models\Project;
 use App\Models\Reminder;
 use App\Models\Stakeholder;
 use App\Models\Topic;
+use App\Services\BriefService;
 use App\Support\Present;
 use Illuminate\Support\Carbon;
 use Inertia\Inertia;
@@ -15,6 +17,10 @@ use Inertia\Response;
 
 class DashboardController extends Controller
 {
+    public function __construct(private readonly BriefService $briefs)
+    {
+    }
+
     public function index(): Response
     {
         $today = Carbon::now()->toDateString();
@@ -74,13 +80,23 @@ class DashboardController extends Controller
             ->get()
             ->map(fn ($c) => Present::communication($c));
 
+        $meetings = Meeting::with(['attendees', 'project'])
+            ->where('scheduled_at', '>=', Carbon::now()->startOfDay())
+            ->orderBy('scheduled_at')
+            ->take(5)
+            ->get()
+            ->map(fn ($m) => Present::meeting($m));
+
         return Inertia::render('Dashboard', [
+            'greeting' => $this->briefs->greeting(),
+            'today' => Carbon::now()->format('l, j F Y'),
             'stats' => $stats,
             'chaseToday' => $chaseToday,
             'dueCommitments' => $dueCommitments,
             'projects' => $projects,
             'topics' => $topics,
             'recentComms' => $recentComms,
+            'meetings' => $meetings,
         ]);
     }
 }
