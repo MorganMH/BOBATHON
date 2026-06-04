@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react';
 import { router, usePage } from '@inertiajs/react';
 import {
     Theme,
@@ -13,7 +13,9 @@ import {
 } from '@carbon/react';
 import { Microphone } from '@carbon/icons-react';
 import type { SharedProps } from '@/types';
-import VoiceOrb from '@/Voice/VoiceOrb';
+
+// Voice (and the Gemini SDK it pulls in) loads only when the orb opens.
+const VoiceOrb = lazy(() => import('@/Voice/VoiceOrb'));
 
 const NAV: { label: string; href: string }[] = [
     { label: 'Command Centre', href: '/' },
@@ -65,7 +67,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
                         <HeaderMenuItem
                             key={item.href}
                             href={item.href}
-                            isCurrentPage={isActive(item.href)}
+                            isActive={isActive(item.href)}
                             onClick={go(item.href)}
                         >
                             {item.label}
@@ -95,7 +97,11 @@ export default function AppLayout({ children }: { children: ReactNode }) {
                 {children}
             </main>
 
-            <VoiceOrb open={voiceOpen} onOpenChange={setVoiceOpen} voiceConfigured={voiceConfigured} />
+            {voiceOpen ? (
+                <Suspense fallback={null}>
+                    <VoiceOrb open={voiceOpen} onOpenChange={setVoiceOpen} voiceConfigured={voiceConfigured} />
+                </Suspense>
+            ) : null}
 
             {toast ? (
                 <div style={{ position: 'fixed', top: '3.5rem', right: '1rem', zIndex: 9000 }}>

@@ -13,6 +13,7 @@ import {
     StatTile,
     StatusTag,
 } from '@/Components/ui';
+import LiveEmailDemo from '@/Components/LiveEmailDemo';
 import type { Commitment, Communication, Project, Reminder, Topic } from '@/types';
 
 interface Stats {
@@ -51,6 +52,8 @@ export default function Dashboard({ stats, chaseToday, dueCommitments, projects,
                     </Button>
                 }
             />
+
+            <LiveEmailDemo />
 
             <div className="cc-stats">
                 <StatTile label="Open commitments" value={stats.open_commitments} />

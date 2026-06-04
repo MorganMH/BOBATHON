@@ -1,4 +1,9 @@
-// IBM Carbon Design System — full styles (components, themes, fonts).
+// IBM Carbon Design System — full styles (components, themes).
+// Disable Carbon's package-relative @font-face: the `~@ibm/plex` URLs don't resolve
+// under Vite and 404 at runtime. IBM Plex is loaded from Google Fonts in app.blade.php.
+@use '@carbon/styles/scss/config' with (
+    $css--font-face: false,
+);
 @use '@carbon/react';
 
 // ---------------------------------------------------------------------------
